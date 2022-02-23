@@ -8,7 +8,14 @@ export default createStore({
         message: '',
         terms: false,
         inputError: '',
-        submitted: false
+        submitted: false,
+        currentUsername: '',
+        currentPassword: '',
+        notLoggedIn: true,
+        users: [{
+          usrname: 'admin',
+          pw: 'password'
+        }]
   },
   mutations: { // synchrounous way to globally update variables above. Mutations committe's
     setCurrentName(state, newName) {
@@ -25,7 +32,20 @@ export default createStore({
     },
     setMessage(state, newMessage) {
       state.message = newMessage;
-    }
+    },
+    //loginForm:
+    setCurrentUsername(state, newUsername) {
+      state.currentUsername = newUsername
+    },
+    setCurrentPassword(state, newPassword) {
+      state.currentPassword = newPassword
+    },
+    setLoggedIn(state, bool) {
+      state.notLoggedIn = bool
+    },
+    storeUser(state, usr) {
+      state.users.push(usr)
+    },
   },
   actions: { // asynchronous. For fetch fra API, da vi må vente på data etter request. Actions dispatches
               // Kan heller ikke access data fra state.

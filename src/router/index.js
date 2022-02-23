@@ -1,12 +1,17 @@
 import { createRouter, createWebHistory } from 'vue-router'
 import ContactFrom from '../views/ContactForm.vue'
 import Calculator from '../views/Calculator.vue'
+import Welcome from '../views/Welcome.vue'
 
 
 const routes = [
- 
   {
     path: '/',
+    name: 'Welcome',
+    component: Welcome
+  },
+  {
+    path: '/calculator',
     name: 'Calculator',
     component: Calculator
   },

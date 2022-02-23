@@ -1,29 +1,30 @@
 <template>
+
   <div id="nav">
-    <router-link to="/">Calculator</router-link> |
-    <router-link :to="{name: 'ContactForm'}">Contact</router-link>
+    <router-link v-show="!(this.$store.state.notLoggedIn)" :to="{name: 'Calculator'}">Calculator</router-link>  
+    <router-link v-show="!(this.$store.state.notLoggedIn)" :to="{name: 'ContactForm'}">Contact</router-link>
   </div>
-  <!--
-  <button @click="redirect">Redirect</button>
-  <button @click="back">Go back</button>
-  <button @click="forward">Go forward</button>
- -->
-  <router-view/>
+  
+  <router-view @transfer="redirect"/>
 </template>
 
 <script>
 export default {
-   methods: {
-    redirect() {
-      this.$router.push({ name: 'Home' })
-    },
-    back() {
-      this.$router.go(-1)
-    },
-    forward() {
-      this.$router.go(1)
+
+  data() {
+    return {
+      loggedIn: false,
+      cnt: 0
     }
+  },
+ // v-show
+   methods: {
+     redirect() {
+       this.$router.push({ name: 'Calculator' })
+     }
   }
+  
+  
 }
 </script>
 
