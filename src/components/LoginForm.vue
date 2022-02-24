@@ -9,20 +9,23 @@
       <input data-test="notStoredPassword" type="password" required v-model="password">  <!-- v-model er 2 way binding. Vi kan alså hente ut input, eller outputte til input box -->
 
     <div class="loginButton">
-        <button data-test="loginButton" @click="handleLogin">Login</button> <!-- Go to calculator page -->
+        <button type="button" data-test="loginButton" @click="handleLogin">Login</button> <!-- Go to calculator page -->
     </div>
 
     
   </form>
   <div data-test="failedLogin" class="submitReg" v-if="failedLogin">
     <p>Not registered?</p>
-    <button @click="emitEvent">Register</button>
+    <button type="button" @click="emitEvent">Register</button>
   </div>
   
 </template>
 
 <script>
+
 export default {
+  emits: ['transfer', 'showReg'],
+  
     data() {
         return {
           myArr: [],
@@ -37,9 +40,9 @@ export default {
             for(let i = 0; i < this.myArr.length; i++) {
               let current = this.myArr[i];
               if(current.usrname === this.$store.state.currentUsername && current.pw === this.$store.state.currentPassword) {
-                this.$store.commit('setLoggedIn', false);
-                success = true
+                this.$store.dispatch('setLoggedIn', false)
                 this.$emit('transfer')
+                success = true
               }
             }
             if(!success) {

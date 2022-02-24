@@ -19,7 +19,14 @@ export default createStore({
           address: 'Hoemsbakken 8',
           email: 'oskar.eidem@hotmail.com',
           phone: '98444451'
-        }]
+        }],
+        currentRegFullName: '',
+        currentRegAddress: '',
+        currentRegUsername: '',
+        currentRegPassword: '',
+        currentRegEmail: '',
+        currentRegPhone: ''
+
   },
   mutations: { // synchrounous way to globally update variables above. Mutations committe's
     setCurrentName(state, newName) {
@@ -45,20 +52,40 @@ export default createStore({
     setCurrentPassword(state, newPassword) {
       state.currentPassword = newPassword
     },
-    setLoggedIn(state, bool) {
-      state.notLoggedIn = bool
-    },
     storeUser(state, usr) {
       state.users.push(usr)
     },
 
     // RegisterForm:
-    
+    setCurrentRegFullName(state, newFullName) {
+      state.currentRegFullName = newFullName
+    },
+    setCurrentRegAddress(state, newAddress) {
+      state.currentRegAddress = newAddress
+    },
+    setCurrentRegUsername(state, newUsername) {
+      state.currentRegUsername = newUsername
+    },
+    setCurrentRegPassword(state, newPassword) {
+      state.currentRegPassword = newPassword
+    },
+    setCurrentRegEmail(state, newEmail) {
+      state.currentRegEmail = newEmail
+    },
+    setCurrentRegPhone(state, newPhone) {
+      state.currentRegPhone = newPhone
+    }
+
+
   },
   actions: { // asynchronous. For fetch fra API, da vi må vente på data etter request. Actions dispatches
               // Kan heller ikke access data fra state.
               // Men man kan gjøre et API call, så fra samme metoden calle en mutation metode.
-    
+              setLoggedIn(state, bool) {
+                state.notLoggedIn = bool
+                console.log('setLoggedIn called')
+              }
+              
   },
   modules: { // lar oss dele opp store i moduler, hvor hver modul har mutations, getters, state osv..
   },

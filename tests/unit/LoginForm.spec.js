@@ -1,3 +1,4 @@
+
 import { mount } from '@vue/test-utils'
 import LoginForm from '@/components/LoginForm.vue'
 import { createStore } from 'vuex'
@@ -26,7 +27,8 @@ describe('LoginForm', () => {
                      users: myArr},
            mutations: { setCurrentUsername: mockedIncFn,
                         setCurrentPassword: mockedPw,
-                        setLoggedIn: mocklogin }
+                         },
+           actions: {setLoggedIn: mocklogin}
        })
    })
 
@@ -53,15 +55,18 @@ describe('LoginForm', () => {
         wrapper.get('[data-test="notStoredUser"]').setValue("someName")
         expect(mockedIncFn).toHaveBeenCalled()
     })
-
+    
+    
     test('Login success with default info', async () => {
         const wrapper = mount(LoginForm, {
             global: { plugins: [store] } 
         })
         wrapper.get('[data-test="notStoredUser"]').setValue("admin")
         wrapper.get('[data-test="notStoredPassword"]').setValue("password")
+        
         await wrapper.vm.handleLogin()
         expect(mocklogin).toHaveBeenCalled()
+        
     })
     
 
