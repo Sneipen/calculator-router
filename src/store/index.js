@@ -15,10 +15,10 @@ export default createStore({
         users: [{
           usrname: 'admin',
           pw: 'password',
-          fullname: 'Oskar Eidem',
-          address: 'Hoemsbakken 8',
-          email: 'oskar.eidem@hotmail.com',
-          phone: '98444451'
+          fullname: 'Per kis',
+          address: 'Per stien',
+          email: 'per.kis@hotmail.com',
+          phone: '78902314'
         }],
         currentRegFullName: '',
         currentRegAddress: '',
