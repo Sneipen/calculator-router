@@ -14,7 +14,11 @@ export default createStore({
         notLoggedIn: true,
         users: [{
           usrname: 'admin',
-          pw: 'password'
+          pw: 'password',
+          fullname: 'Oskar Eidem',
+          address: 'Hoemsbakken 8',
+          email: 'oskar.eidem@hotmail.com',
+          phone: '98444451'
         }]
   },
   mutations: { // synchrounous way to globally update variables above. Mutations committe's
@@ -33,6 +37,7 @@ export default createStore({
     setMessage(state, newMessage) {
       state.message = newMessage;
     },
+
     //loginForm:
     setCurrentUsername(state, newUsername) {
       state.currentUsername = newUsername
@@ -46,6 +51,9 @@ export default createStore({
     storeUser(state, usr) {
       state.users.push(usr)
     },
+
+    // RegisterForm:
+    
   },
   actions: { // asynchronous. For fetch fra API, da vi må vente på data etter request. Actions dispatches
               // Kan heller ikke access data fra state.

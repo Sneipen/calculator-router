@@ -1,24 +1,24 @@
 <template>
   <h1>Registration</h1>
-    <form @submit.prevent="handleLogin"> <!-- .prevent gjør at vi unngår default event når vi submitter, fordi vi må sjekke om user input er valid først -->
+    <form @submit.prevent="handleLogin">
       
       <label>Full name:</label>
-      <input type="text" required="required">
+      <input type="text" required v-model="fullName">
 
       <label>Address:</label>
-      <input type="text" required="required">
+      <input type="text" required v-model="address">
 
       <label>Username:</label>
-      <input type="text" required />
+      <input type="text" required v-model="username">
       
       <label>Password:</label>
-      <input type="password" required="required">  <!-- v-model er 2 way binding. Vi kan alså hente ut input, eller outputte til input box -->
+      <input type="password" required v-model="password">  
 
       <label>Email:</label>
-      <input type="email" required="required">
+      <input type="email" required v-model="email">
 
       <label>Phone:</label>
-      <input type="text" required="required">
+      <input type="text" required v-model="phone">
 
     <div class="login">
         <button type="submit" class="submit" @click="handleLogin">Register</button> <!-- Go to calculator page -->
@@ -32,7 +32,13 @@ export default {
 
     data() {
         return {
-            myArr: []
+            myArr: [],
+            fullName: '',
+            address: '',
+            username: '',
+            password: '',
+            email: '',
+            phone: ''
         }
     },
 
@@ -42,16 +48,28 @@ export default {
             let success = true
             for(let i = 0; i < this.myArr.length; i++) {
               let current = this.myArr[i];
-              if(current.usrname === this.$store.state.currentUsername && current.pw === this.$store.state.currentPassword) {
+              if(current.usrname === this.username) {
                 success = false
+                console.log('username taken')
               }
             }
             if(success) {
-                this.$store.commit('setLoggedIn', false);
+              console.log('Account made')
+              let usr = {
+                usrname: this.username,
+                pw: this.password,
+                fullname: this.fullName,
+                address: this.address,
+                email: this.email,
+                phone: this.phone
+              }
+                this.$store.commit('storeUser', usr)
+                this.$store.commit('setLoggedIn', false)
                 this.$emit('transfer')
             }
         }
     }
+
 
 }
 </script>

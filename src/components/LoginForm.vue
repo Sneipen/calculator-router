@@ -1,20 +1,20 @@
 <template>
  <h1>Please Login</h1>
- <form @submit.prevent="handleLogin"> <!-- .prevent gjør at vi unngår default event når vi submitter, fordi vi må sjekke om user input er valid først -->
+ <form data-test="form" @submit.prevent="handleLogin"> <!-- .prevent gjør at vi unngår default event når vi submitter, fordi vi må sjekke om user input er valid først -->
       
       <label>Username:</label>
-      <input type="text" required v-model="username">
+      <input data-test="notStoredUser" type="text" required v-model="username">
       
       <label>Password:</label>
-      <input type="password" required v-model="password">  <!-- v-model er 2 way binding. Vi kan alså hente ut input, eller outputte til input box -->
+      <input data-test="notStoredPassword" type="password" required v-model="password">  <!-- v-model er 2 way binding. Vi kan alså hente ut input, eller outputte til input box -->
 
     <div class="loginButton">
-        <button @click="handleLogin">Login</button> <!-- Go to calculator page -->
+        <button data-test="loginButton" @click="handleLogin">Login</button> <!-- Go to calculator page -->
     </div>
 
     
   </form>
-  <div class="submitReg" v-if="failedLogin">
+  <div data-test="failedLogin" class="submitReg" v-if="failedLogin">
     <p>Not registered?</p>
     <button @click="emitEvent">Register</button>
   </div>
@@ -32,16 +32,12 @@ export default {
 
     methods: {
         handleLogin() {
-            // sjekke om et user objekt i store matcher username og passord fra input.
-            // if so --> go to calculator page
-            // else --> swap to register component
             this.myArr = this.$store.state.users;
             let success = false
             for(let i = 0; i < this.myArr.length; i++) {
               let current = this.myArr[i];
               if(current.usrname === this.$store.state.currentUsername && current.pw === this.$store.state.currentPassword) {
                 this.$store.commit('setLoggedIn', false);
-                console.log('logged in')
                 success = true
                 this.$emit('transfer')
               }
