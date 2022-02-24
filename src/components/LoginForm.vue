@@ -40,7 +40,7 @@ export default {
             for(let i = 0; i < this.myArr.length; i++) {
               let current = this.myArr[i];
               if(current.usrname === this.$store.state.currentUsername && current.pw === this.$store.state.currentPassword) {
-                this.$store.dispatch('setLoggedIn', false)
+                this.$store.commit('setLoggedIn', false)
                 this.$emit('transfer')
                 success = true
               }

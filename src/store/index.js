@@ -74,6 +74,10 @@ export default createStore({
     },
     setCurrentRegPhone(state, newPhone) {
       state.currentRegPhone = newPhone
+    },
+    setLoggedIn(state, bool) {
+      state.notLoggedIn = bool
+      console.log('setLoggedIn called')
     }
 
 
@@ -81,11 +85,13 @@ export default createStore({
   actions: { // asynchronous. For fetch fra API, da vi må vente på data etter request. Actions dispatches
               // Kan heller ikke access data fra state.
               // Men man kan gjøre et API call, så fra samme metoden calle en mutation metode.
+              /*
               setLoggedIn(state, bool) {
                 state.notLoggedIn = bool
                 console.log('setLoggedIn called')
+                
               }
-              
+              */
   },
   modules: { // lar oss dele opp store i moduler, hvor hver modul har mutations, getters, state osv..
   },

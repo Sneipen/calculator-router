@@ -60,7 +60,7 @@ export default {
                 phone: this.phone
               }
                 this.$store.commit('storeUser', usr)
-                this.$store.dispatch('setLoggedIn', false)
+                this.$store.commit('setLoggedIn', false)
                 this.$emit('transfer')
             }
         }
